@@ -1,15 +1,64 @@
-name: chess
-version: 1.0.0
-build-type: Simple
-cabal-version: >=1.10
+-- This file has been generated from package.yaml by hpack version 0.28.2.
+--
+-- see: https://github.com/sol/hpack
+--
+-- hash: a793dcfe101512f0c635f30dc1e599a8871afbc4254b0ff6547aae2856eacbb4
 
-executable chess
-    main-is: main.hs
-    build-depends:
-        base,
-        containers,
-        base-prelude,
-        hspec,
-        set-extra
-    hs-source-dirs: src
-    default-language: Haskell2010
+name:           chess
+version:        0.1.0.0
+description:    Please see the README on GitHub at <https://github.com/githubuser/chess#readme>
+homepage:       https://github.com/githubuser/chess#readme
+bug-reports:    https://github.com/githubuser/chess/issues
+author:         Author name here
+maintainer:     example@example.com
+copyright:      2018 Author name here
+license:        BSD3
+license-file:   LICENSE
+build-type:     Simple
+cabal-version:  >= 1.10
+extra-source-files:
+    ChangeLog.md
+    README.md
+
+source-repository head
+  type: git
+  location: https://github.com/githubuser/chess
+
+library
+  exposed-modules:
+      Lib
+  other-modules:
+      Paths_chess
+  hs-source-dirs:
+      src
+  build-depends:
+      base >=4.7 && <5
+  default-language: Haskell2010
+
+executable chess-exe
+  main-is: Main.hs
+  other-modules:
+      Paths_chess
+  hs-source-dirs:
+      app
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      base >=4.7 && <5
+    , containers
+    , set-extra
+    , chess
+  default-language: Haskell2010
+
+test-suite chess-test
+  type: exitcode-stdio-1.0
+  main-is: Spec.hs
+  other-modules:
+      Paths_chess
+  hs-source-dirs:
+      test
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      base >=4.7 && <5
+    , set-extra  
+    , chess
+  default-language: Haskell2010
