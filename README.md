@@ -12,17 +12,18 @@ When returning your solution, please provide with your answer the total number o
 
 # The Solution
 
-[I already solved this problem in Scala](https://github.com/ignaciomosca/ChessChallengeScala)  
 The following solution is based on the [N-Queen Problem](https://developers.google.com/optimization/cp/queens) which is a well known optimization problem taught in Computer Science Classes. The proposed solution makes use of a technique called backtracking to find all the solutions to the problem.
 Based on experience with previous problems, I reduced the current problem to an N-Queen problem with an 8x8 Board. I figured that after being able to get the solution for that problem, solving the rest of it was a matter of adding more pieces, determining how they moved, and writing unit tests for them.
 
 # Dependencies
 
 * Haskell
+* Stack
 
 # Instructions
 
-* git clone https://ignaciomosca@bitbucket.org/ignaciomosca/chesschallengehaskell.git
-* cd chesschallengehaskell
-* ghc main.hs
-* ./main
+* `git clone https://ignaciomosca@bitbucket.org/ignaciomosca/chesschallengehaskell.git`
+* `cd chesschallengehaskell`
+* `stack install`
+* `stack ghci` | `stack test`
+* `main`
