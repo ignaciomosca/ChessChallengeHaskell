@@ -2,7 +2,7 @@
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: a793dcfe101512f0c635f30dc1e599a8871afbc4254b0ff6547aae2856eacbb4
+-- hash: 943bf5a7714b80557f594f8e000da7b3b6f80a9d2f73ce2d17160b4c9e3fcb8d
 
 name:           chess
 version:        0.1.0.0
@@ -33,6 +33,9 @@ library
       src
   build-depends:
       base >=4.7 && <5
+    , containers
+    , set-extra
+    , split
   default-language: Haskell2010
 
 executable chess-exe
@@ -44,9 +47,10 @@ executable chess-exe
   ghc-options: -threaded -rtsopts -with-rtsopts=-N
   build-depends:
       base >=4.7 && <5
+    , chess
     , containers
     , set-extra
-    , chess
+    , split
   default-language: Haskell2010
 
 test-suite chess-test
@@ -59,6 +63,8 @@ test-suite chess-test
   ghc-options: -threaded -rtsopts -with-rtsopts=-N
   build-depends:
       base >=4.7 && <5
-    , set-extra  
     , chess
+    , containers
+    , set-extra
+    , split
   default-language: Haskell2010

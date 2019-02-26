@@ -2,7 +2,8 @@ module Main where
 
     import Data.Set
     import Data.Set.Extra
-    
+    import Data.List.Split
+
     data PieceType = Rook | Bishop | Knight | Queen | King deriving(Show, Eq, Ord)
     data ChessPiece = Piece {row::Int, col::Int, piece::PieceType} deriving(Eq, Ord)
     data Board = Board{m:: Int, n:: Int, usedPieces:: Set ChessPiece , numberOfPieces:: Int} deriving(Eq, Ord)
@@ -27,18 +28,14 @@ module Main where
         attacks Piece{row = aRow, col = aCol, piece = King} Piece{row = r, col = c} = (r,c) `elem` (kingMoves aRow aCol)
     
     findCandidate :: ChessPiece -> Board -> Set Board
-    findCandidate Piece { row = r, col = c, piece = p } Board { m = m, n = n, usedPieces = up, numberOfPieces = nps }
+    findCandidate Piece { piece = p } Board { m = m, n = n, usedPieces = up, numberOfPieces = nps }
         = Data.Set.fromList $
             [ newBoard
             | rr <- [1 .. m]
             , cc <- [1 .. n]
             , let pp = createPiece p rr cc
             , let newBoard = place Board {m = m, n = n, usedPieces = up, numberOfPieces = nps} pp
-            , let isValid = isSafe newBoard pp]
-            
-    
-    max :: Int -> Int -> Int
-    max a b = if a>b then a else b
+            , isSafe newBoard pp]
     
     solution :: Board -> [ChessPiece] -> Set Board -> Set Board
     solution board (p : ps) solutions = solution board ps (Data.Set.Extra.flatten (Data.Set.map (findCandidate p) solutions))
@@ -46,11 +43,11 @@ module Main where
     
     chessPieceList :: Int -> Int -> Int -> Int -> Int -> [ChessPiece]
     chessPieceList kings queens bishops rooks knights =
-        replicate kings Piece {piece = King}
-            ++ replicate queens  Piece {piece = Queen}
-            ++ replicate bishops Piece {piece = Bishop}
-            ++ replicate knights Piece {piece = Knight}
-            ++ replicate rooks   Piece {piece = Rook}
+               replicate kings Piece {row=0,col=0,piece = King}
+            ++ replicate queens  Piece {row=0,col=0,piece = Queen}
+            ++ replicate bishops Piece {row=0,col=0,piece = Bishop}
+            ++ replicate knights Piece {row=0,col=0,piece = Knight}
+            ++ replicate rooks   Piece {row=0,col=0,piece = Rook}
     
     makeSolution :: Int -> Int -> Int -> Int -> Int -> Int -> Int -> Set Board
     makeSolution m n kings queens bishops rooks knights = solution
@@ -83,7 +80,7 @@ module Main where
         rooks <- readLn :: IO Int
         putStrLn "How many knights are to be placed on the board?"
         knights <- readLn :: IO Int
-        Prelude.mapM_ putStrLn $ Prelude.map printBoard $ toList(makeSolution m n kings queens bishops rooks knights)
+        Prelude.mapM_ putStrLn $ Prelude.map show $ toList(makeSolution m n kings queens bishops rooks knights)
     
     kingMoves :: Int -> Int -> [(Int, Int)]
     kingMoves r c = [ (r + x, c + y) | x <- [-1, 1, 0], y <- [-1, 1, 0] ]
@@ -101,15 +98,8 @@ module Main where
         show Piece{piece = Queen} = "Q"
         show Piece{piece = King} = "K"
 
-    group :: Int -> [a] -> [[a]]
-    group _ [] = []
-    group n l
-      | n > 0 = (Prelude.take n l) : (group n (Prelude.drop n l))
-      | otherwise = error "Negative or zero n"
+    instance Show Board where
+        show Board {m = mm, n= nn, usedPieces = up, numberOfPieces=np} = Prelude.unlines $ Prelude.map Prelude.unwords  $ chunksOf mm [(printPiece p r c) | p <- (toList up), r<-[1..mm], c<-[1..nn]]    
 
     printPiece:: ChessPiece -> Int -> Int -> String
-    printPiece Piece{row = rr, col = cc, piece = p} r c = if rr == r && cc==c then show p else "-" 
-
-    printBoard :: Board -> String
-    printBoard Board {m = mm, n= nn, usedPieces = up, numberOfPieces=np} = Prelude.unlines $ Prelude.map Prelude.unwords  $ group mm [(printPiece p r c) | p <- (toList up), r<-[1..mm], c<-[1..nn]]
-    
+    printPiece Piece{row = rr, col = cc, piece = p} r c = if rr == r && cc==c then show p else "-"     
