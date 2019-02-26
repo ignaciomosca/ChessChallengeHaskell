@@ -83,7 +83,7 @@ module Main where
         rooks <- readLn :: IO Int
         putStrLn "How many knights are to be placed on the board?"
         knights <- readLn :: IO Int
-        print (length $ makeSolution m n kings queens bishops rooks knights)
+        Prelude.mapM_ putStrLn $ Prelude.map printBoard $ toList(makeSolution m n kings queens bishops rooks knights)
     
     kingMoves :: Int -> Int -> [(Int, Int)]
     kingMoves r c = [ (r + x, c + y) | x <- [-1, 1, 0], y <- [-1, 1, 0] ]
@@ -100,4 +100,16 @@ module Main where
         show Piece{piece = Knight} = "N"
         show Piece{piece = Queen} = "Q"
         show Piece{piece = King} = "K"
+
+    group :: Int -> [a] -> [[a]]
+    group _ [] = []
+    group n l
+      | n > 0 = (Prelude.take n l) : (group n (Prelude.drop n l))
+      | otherwise = error "Negative or zero n"
+
+    printPiece:: ChessPiece -> Int -> Int -> String
+    printPiece Piece{row = rr, col = cc, piece = p} r c = if rr == r && cc==c then show p else "-" 
+
+    printBoard :: Board -> String
+    printBoard Board {m = mm, n= nn, usedPieces = up, numberOfPieces=np} = Prelude.unlines $ Prelude.map Prelude.unwords  $ group mm [(printPiece p r c) | p <- (toList up), r<-[1..mm], c<-[1..nn]]
     
