@@ -18,4 +18,6 @@ main = do
     rooks <- readLn :: IO Int
     putStrLn "How many knights are to be placed on the board?"
     knights <- readLn :: IO Int
-    mapM_ putStrLn $ Prelude.map show $ toList(makeSolution m n kings queens bishops rooks knights)
+    print (length $ makeSolution m n kings queens bishops rooks knights)
+
+--print (length $ makeSolution m n kings queens bishops rooks knights)
