@@ -69,20 +69,12 @@ chessPieceList kings queens bishops rooks knights =
         ++ replicate rooks   Piece {row=0,col=0,piece = Rook}
 
 makeSolution :: Int -> Int -> Int -> Int -> Int -> Int -> Int -> Set Board
-makeSolution m n kings queens bishops rooks knights = solution
-    Board
-        { m              = m
-        , n              = n
-        , usedPieces     = Data.Set.empty
-        , numberOfPieces = kings + queens + bishops + rooks + knights
-        }
-    (chessPieceList kings queens bishops rooks knights)
-    (Data.Set.singleton Board
-        { m              = m
-        , n              = n
-        , usedPieces     = Data.Set.empty
-        , numberOfPieces = kings + queens + bishops + rooks + knights
-        })
+makeSolution m n kings queens bishops rooks knights = solution anEmptyBoard (chessPieceList kings queens bishops rooks knights) (Data.Set.singleton anEmptyBoard)
+  where anEmptyBoard = emptyBoard m n nPieces
+        nPieces = kings + queens + bishops + rooks + knights
+
+emptyBoard::Int->Int->Int->Board
+emptyBoard mm nn nPieces = Board{ m = mm, n = nn, usedPieces = Data.Set.empty, numberOfPieces = nPieces }
 
 createPiece :: PieceType -> Int -> Int -> ChessPiece
 createPiece p r c = Piece {row = r, col = c, piece = p}
