@@ -2,7 +2,7 @@
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 424b007fced787572be4db770caf481ad1cbec67f27c11b31ec48a76e0171c47
+-- hash: 85c8bf9c63d6b90572cab660d65bc6af228975b11407d419beb1bbee2151e0dc
 
 name:           chess
 version:        0.1.0.0
@@ -59,6 +59,8 @@ test-suite chess-test
   type: exitcode-stdio-1.0
   main-is: Spec.hs
   other-modules:
+      BoardSpec
+      PieceSpec
       Paths_chess
   hs-source-dirs:
       test
