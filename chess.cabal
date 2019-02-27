@@ -2,16 +2,16 @@
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 85c8bf9c63d6b90572cab660d65bc6af228975b11407d419beb1bbee2151e0dc
+-- hash: c5f65b520c01eb24ae9be65208e247deffe7975f1ec75f136c632adb4e787991
 
 name:           chess
 version:        0.1.0.0
 description:    Please see the README on GitHub at <https://github.com/githubuser/chess#readme>
-homepage:       https://github.com/githubuser/chess#readme
-bug-reports:    https://github.com/githubuser/chess/issues
-author:         Author name here
-maintainer:     example@example.com
-copyright:      2018 Author name here
+homepage:       https://github.com/ignaciomosca/chess#readme
+bug-reports:    https://github.com/ignaciomosca/chess/issues
+author:         Ignacio Mosca
+maintainer:     ignaciomosca@outlook.com
+copyright:      2018 Ignacio Mosca
 license:        BSD3
 license-file:   LICENSE
 build-type:     Simple
@@ -22,7 +22,7 @@ extra-source-files:
 
 source-repository head
   type: git
-  location: https://github.com/githubuser/chess
+  location: https://github.com/ignaciomosca/chess
 
 library
   exposed-modules:
