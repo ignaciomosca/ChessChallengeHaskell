@@ -8,15 +8,12 @@ data PieceType = Rook | Bishop | Knight | Queen | King deriving(Show, Eq, Ord)
 data ChessPiece = Piece {row::Int, col::Int, piece::PieceType} deriving(Eq, Ord)
 data Board = Board{m:: Int, n:: Int, usedPieces:: Set ChessPiece , numberOfPieces:: Int} deriving(Eq, Ord)
 
-class Piece piece where
-    attacks :: piece -> ChessPiece -> Bool
-
-instance Piece ChessPiece where
-    attacks Piece{row = aRow, col = aCol, piece = Rook} Piece{row = r, col = c} = aRow == r || aCol == c
-    attacks Piece{row = aRow, col = aCol, piece = Bishop} Piece{row = r, col = c} = abs(r - aRow) == abs(c - aCol)
-    attacks Piece{row = aRow, col = aCol, piece = Knight} Piece{row = r, col = c} = (r,c) `elem` (knightMoves aRow aCol)
-    attacks Piece{row = aRow, col = aCol, piece = Queen} Piece{row = r, col = c} = r == aRow || c == aCol || abs(r - aRow) == abs(c - aCol)
-    attacks Piece{row = aRow, col = aCol, piece = King} Piece{row = r, col = c} = (r,c) `elem` (kingMoves aRow aCol)
+attacks :: ChessPiece -> ChessPiece -> Bool
+attacks Piece{row = aRow, col = aCol, piece = Rook} Piece{row = r, col = c} = aRow == r || aCol == c
+attacks Piece{row = aRow, col = aCol, piece = Bishop} Piece{row = r, col = c} = abs(r - aRow) == abs(c - aCol)
+attacks Piece{row = aRow, col = aCol, piece = Knight} Piece{row = r, col = c} = (r,c) `elem` (knightMoves aRow aCol)
+attacks Piece{row = aRow, col = aCol, piece = Queen} Piece{row = r, col = c} = r == aRow || c == aCol || abs(r - aRow) == abs(c - aCol)
+attacks Piece{row = aRow, col = aCol, piece = King} Piece{row = r, col = c} = (r,c) `elem` (kingMoves aRow aCol)
     
 kingMoves :: Int -> Int -> [(Int, Int)]
 kingMoves r c = [ (r + x, c + y) | x <- [-1, 1, 0], y <- [-1, 1, 0] ]

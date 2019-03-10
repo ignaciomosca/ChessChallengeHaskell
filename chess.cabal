@@ -2,7 +2,7 @@
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: c5f65b520c01eb24ae9be65208e247deffe7975f1ec75f136c632adb4e787991
+-- hash: bcdbddfadc5cccc2981572f7f5afd643d0a34917fef234258393ce248be09447
 
 name:           chess
 version:        0.1.0.0
@@ -45,7 +45,7 @@ executable chess-exe
       Paths_chess
   hs-source-dirs:
       app
-  ghc-options: -threaded -rtsopts -with-rtsopts=-N
+  ghc-options: -O2
   build-depends:
       base >=4.7 && <5
     , chess
@@ -64,7 +64,7 @@ test-suite chess-test
       Paths_chess
   hs-source-dirs:
       test
-  ghc-options: -threaded -rtsopts -with-rtsopts=-N
+  ghc-options: -O2
   build-depends:
       base >=4.7 && <5
     , chess
