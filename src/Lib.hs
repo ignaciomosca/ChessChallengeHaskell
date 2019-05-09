@@ -5,8 +5,8 @@ import Data.Set.Extra
 import Data.List.Split
 
 data PieceType = Rook | Bishop | Knight | Queen | King deriving(Show, Eq, Ord)
-data ChessPiece = Piece {row::Int, col::Int, piece::PieceType} deriving(Eq, Ord)
-data Board = Board{m:: Int, n:: Int, usedPieces:: Set ChessPiece , numberOfPieces:: Int} deriving(Eq, Ord)
+data ChessPiece = Piece {row:: !Int, col:: !Int, piece:: PieceType} deriving(Eq, Ord)
+data Board = Board{m:: !Int, n:: !Int, usedPieces:: Set ChessPiece , numberOfPieces:: !Int} deriving(Eq, Ord)
 
 attacks :: ChessPiece -> ChessPiece -> Bool
 attacks Piece{row = aRow, col = aCol, piece = Rook} Piece{row = r, col = c} = aRow == r || aCol == c

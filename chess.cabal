@@ -1,8 +1,10 @@
--- This file has been generated from package.yaml by hpack version 0.28.2.
+cabal-version: 1.12
+
+-- This file has been generated from package.yaml by hpack version 0.31.1.
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: bcdbddfadc5cccc2981572f7f5afd643d0a34917fef234258393ce248be09447
+-- hash: b77e009bae0d7cf2bb238180043fbe91754d37ae2443c76dd9becca339cadc7f
 
 name:           chess
 version:        0.1.0.0
@@ -15,10 +17,9 @@ copyright:      2018 Ignacio Mosca
 license:        BSD3
 license-file:   LICENSE
 build-type:     Simple
-cabal-version:  >= 1.10
 extra-source-files:
-    ChangeLog.md
     README.md
+    ChangeLog.md
 
 source-repository head
   type: git
