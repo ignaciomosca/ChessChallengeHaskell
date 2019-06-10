@@ -1,8 +1,8 @@
 module Lib where
 
+import Data.List.Split
 import Data.Set
 import Data.Set.Extra
-import Data.List.Split
 
 data PieceType = Rook | Bishop | Knight | Queen | King deriving(Show, Eq, Ord)
 data ChessPiece = Piece {row:: !Int, col:: !Int, piece:: PieceType} deriving(Eq, Ord)
@@ -14,7 +14,7 @@ attacks Piece{row = aRow, col = aCol, piece = Bishop} Piece{row = r, col = c} = 
 attacks Piece{row = aRow, col = aCol, piece = Knight} Piece{row = r, col = c} = (r,c) `elem` (knightMoves aRow aCol)
 attacks Piece{row = aRow, col = aCol, piece = Queen} Piece{row = r, col = c} = r == aRow || c == aCol || abs(r - aRow) == abs(c - aCol)
 attacks Piece{row = aRow, col = aCol, piece = King} Piece{row = r, col = c} = (r,c) `elem` (kingMoves aRow aCol)
-    
+
 kingMoves :: Int -> Int -> [(Int, Int)]
 kingMoves r c = [ (r + x, c + y) | x <- [-1, 1, 0], y <- [-1, 1, 0] ]
 
@@ -22,14 +22,14 @@ knightMoves :: Int -> Int -> [(Int, Int)]
 knightMoves r c = [ (r + x, c + y) | x <- [-2, -1, 1, 2] , y <- [-2, -1, 1, 2] , abs x /= abs y ]
 
 instance Show ChessPiece where
-    show Piece{piece = Rook} = "R"
+    show Piece{piece = Rook}   = "R"
     show Piece{piece = Bishop} = "B"
     show Piece{piece = Knight} = "N"
-    show Piece{piece = Queen} = "Q"
-    show Piece{piece = King} = "K"
+    show Piece{piece = Queen}  = "Q"
+    show Piece{piece = King}   = "K"
 
 instance Show Board where
-    show Board {m = mm, n= nn, usedPieces = up, numberOfPieces=np} = Prelude.unlines $ Prelude.map Prelude.unwords  $ chunksOf mm [(printPiece p r c) | p <- (toList up), r<-[1..mm], c<-[1..nn]]    
+    show Board { m = mm, n = nn, usedPieces = up, numberOfPieces = np } = Prelude.unlines $ Prelude.map Prelude.unwords  $ chunksOf mm [(printPiece p r c) | p <- (toList up), r <- [1..mm], c <- [1..nn]]
 
 printPiece:: ChessPiece -> Int -> Int -> String
 printPiece p r c = if row p == r && col p == c then show p else "-"
@@ -76,4 +76,4 @@ emptyBoard mm nn nPieces = Board{ m = mm, n = nn, usedPieces = Data.Set.empty, n
 createPiece :: PieceType -> Int -> Int -> ChessPiece
 createPiece p r c = Piece {row = r, col = c, piece = p}
 
-     
+

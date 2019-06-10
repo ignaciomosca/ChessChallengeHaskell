@@ -22,7 +22,7 @@ Based on experience with previous problems, I reduced the current problem to an 
 
 # Instructions
 
-* `git clone https://ignaciomosca@bitbucket.org/ignaciomosca/chesschallengehaskell.git`
+* `git clone https://github.com/ignaciomosca/ChessChallengeHaskell.git`
 * `cd chesschallengehaskell`
 * `stack install`
 * `stack ghci` | `stack test`

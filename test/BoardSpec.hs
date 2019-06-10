@@ -1,10 +1,10 @@
 module BoardSpec where
 
-import Test.Hspec
-import Lib
 import Control.Exception (evaluate)
 import Data.Set
 import Data.Set.Extra
+import Lib
+import Test.Hspec
 
 spec :: Spec
 spec = do

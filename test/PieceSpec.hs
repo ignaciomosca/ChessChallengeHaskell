@@ -1,12 +1,8 @@
 module PieceSpec where
 
-import Test.Hspec
-import Lib
-import Control.Exception (evaluate)   
-
-import Test.Hspec
-import Lib
 import Control.Exception (evaluate)
+import Lib
+import Test.Hspec
 
 spec :: Spec
 spec = do
